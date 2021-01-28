@@ -1,9 +1,18 @@
 version: '3'
 services:
-  database:
+  mongoContainer:
     image: 'mongo'
     container_name: 'mongo-db-container'
     volumes:
-    - ./mongo-volume:/data/db
+      - ./mongo-volume:/data/db
     ports:
-    - 27017:27017
+      - 27017:27017
+
+  product-service:
+    build: ./
+    image: product-service
+    depends_on:
+      - mongoContainer
+    restart: always
+    ports:
+      - 8080:8080
