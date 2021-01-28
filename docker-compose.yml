@@ -1,10 +1,11 @@
-version: '3'
+version: '3.1'
 services:
   mongoContainer:
     image: 'mongo'
     container_name: 'mongo-db-container'
     volumes:
-      - ./mongo-volume:/data/db
+      - mongoData:/data/db
+    network_mode: host
     ports:
       - 27017:27017
 
@@ -13,6 +14,10 @@ services:
     image: product-service
     depends_on:
       - mongoContainer
+    network_mode: host
     restart: always
     ports:
       - 8080:8080
+
+volumes:
+  mongoData:
