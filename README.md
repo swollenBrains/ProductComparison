@@ -16,9 +16,11 @@ The use of datasource helps make this easy to extend.
 - Supporting a new sink to put the data into would mean that we need to inject a new implementation of ProductDbWriter and we need to add a new Provider for writer similar to
  DataReaderProvider or DataProcessorProvider.
 
-### To bring up mongo as container
+### How to run
 
-docker-compose up -d
+- mvn clean install
+
+- docker-compose up -d
 
 ### Pull products
 

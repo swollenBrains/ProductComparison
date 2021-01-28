@@ -5,7 +5,8 @@ services:
     container_name: 'mongo-db-container'
     volumes:
       - mongoData:/data/db
-    network_mode: host
+    networks:
+      - default
     ports:
       - 27017:27017
 
@@ -14,10 +15,19 @@ services:
     image: product-service
     depends_on:
       - mongoContainer
-    network_mode: host
+    networks:
+      - default
     restart: always
     ports:
       - 8080:8080
 
 volumes:
   mongoData:
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.103.0.1/16
